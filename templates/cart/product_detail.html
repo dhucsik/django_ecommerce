@@ -17,9 +17,11 @@
 <div class="site-section">
     <div class="container">
         <div class="row mb-5">
+        {% for image_model in product.image_set.all %}
             <div class="col-md-6">
-                <img src="{{ product.image.url }}" class="img-fluid">
+                <img src="{{ image_model.image.url }}" class="img-fluid">
             </div>
+        {% endfor %}
             <div class="col-md-6">
                 <h2 class="text-black">{{ product.title }}</h2>
                 <p>{{ product.description }}</p>

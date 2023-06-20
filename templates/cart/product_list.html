@@ -13,7 +13,16 @@
         </div>
     </div>
 </div>
-
+    <div class="container">
+    <br/>
+    <form action="" class="form-inline" method="get">
+       <div class="form-group mx-sm-3 mb-2">
+        <label for="" class="sr-only">Search</label>
+        <input name="search" type="" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-success btn-lg mb-2">Search</button>
+   </form>
+    </div>
 <div class="site-section">
     <div class="container">
         <div class="row mb-5">
@@ -22,7 +31,7 @@
                     {% for product in object_list %}
                         <div class="col-sm-6 col-md-6 col-lg-4 mb-4" data-aos='fade-up'>
                             <figure class="block-4-image">
-                                <a href="{{ product.get_absolute_url }}"><img src="{{ product.image.url }}" class="img-fluid"></a>
+                                <a href="{{ product.get_absolute_url }}"><img src="{{ product.image_set.first.image.url }}" class="img-fluid"></a>
                             </figure>
 
                             <div class="block-4-text p-4">
@@ -34,6 +43,34 @@
                         </div>
                     {% endfor %}
                 </div>
+            <div class="row">
+            <div class="col-12">              <ul class="pagination">                {% if page_obj.has_previous %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                {% endif %}                {% for i in paginator.page_range %}
+                  {% if page_obj.number == i %}
+                    <li class="page-item active">
+                    <span class="page-link">
+                      {{ i }}
+                      <span class="sr-only">(current)</span>
+                    </span>
+                    </li>
+                  {% else %}
+                    <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                  {% endif %}
+                {% endfor %}                {% if page_obj.has_next %}
+                  <li class="page-item">
+                    <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                {% endif %}              </ul>            </div>
+          </div>
             </div>
             <div class="col-md-3 mb-4">
                 <div class="border p-4 rounded mb-4">
@@ -48,6 +85,19 @@
                         {% endfor %}
                     </ul>
                 </div>
+             <div class="container">
+                <form action="" class="form-incline" method="get">
+                    <div class="form-group mx-sm-3 mb-2">
+                     <label for="" class="sr-only">Min Price</label>
+                    <input name="min" type="" class="form-control" placeholder="Min Price">
+                </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                     <label for="" class="sr-only">Max Price</label>
+                    <input name="max" type="" class="form-control" placeholder="Max Price">
+                </div>
+                    <button type="submit" class="btn btn-success btn-lg mb-2">Filter</button>
+                </form>
+             </div>
             </div>
         </div>
     </div>

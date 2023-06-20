@@ -71,7 +71,6 @@ class Product(models.Model):
     active = models.BooleanField(default=False)
     updated = models.DateTimeField(auto_now=True)
     created = models.DateTimeField(auto_now_add=True)
-    image = models.ImageField(upload_to='product_images')
     available_sizes = models.ManyToManyField(SizeVariation)
     available_colours = models.ManyToManyField(ColourVariation)
     secondary_categories = models.ManyToManyField(to=Category, blank=True)
@@ -106,6 +105,11 @@ class Product(models.Model):
     @property
     def in_stock(self) -> bool:
         return self.stock > 0
+
+
+class Image(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='product_images')
 
 
 class OrderItem(models.Model):
